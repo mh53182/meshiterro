@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user!, expect: [:top]
+  # :authenticate_user!はdeviseが用意したメソッド。これだけで「ログインされていなければログイン画面にリダイレクトする」を指示
+  # expect: [:top]はtopページを除外する = topページだけはログインされていなくても表示できる
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(resource)
